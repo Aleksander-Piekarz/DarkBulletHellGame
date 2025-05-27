@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Gra Canvas</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <audio id="hellmodeSound" src="sounds/hellmode.mp3"></audio>
+  <audio id="menuMusic" src="sounds/menu.ogg" loop></audio>
+  <audio id="gameMusic" src="sounds/game.mp3" loop></audio>
+</head>
+<body class="animate-bg">
+  <div id="menu">
+    <h1 id="gameTitle">DARK BULLET HELL</h1>
+    <div id="mainMenuBtns">
+      <button id="startBtn" class="main-btn">START GAME</button>
+    </div>
+    <div id="optionsRow">
+      <div id="secondLifeOption">
+        <input type="checkbox" id="secondLifeCheckbox" class="secondlife-chk">
+        <label for="secondLifeCheckbox">Second Life</label>
+      </div>
+      <div id="showSoulCoreRow">
+        <input type="checkbox" id="showHitboxCheckbox" class="soulcore-chk">
+        <label for="showHitboxCheckbox" class="soulcore-label">Show Soul Core</label>
+      </div>
+      <input type="checkbox" id="hellModeCheckbox" class="hell-btn-checkbox">
+      <label for="hellModeCheckbox" class="hell-btn-label">HELL MODE</label>
+    </div>
+  </div>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <div id="sidebarScore">
+    <div id="currentScoreBox">
+      <span id="currentScoreLabel">Twój wynik:</span>
+      <span id="currentScoreValue">0 | 0s</span>
+    </div>
+    <h3>Najlepsze wyniki</h3>
+    <ol id="highscores"></ol>
+  </div>
+
+  <script src="player.js"></script>
+  <script src="bullet.js"></script>
+  <script src="patterns.js"></script>
+  <script src="enemy.js"></script>
+  <script src="utils.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

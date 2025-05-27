@@ -1,0 +1,367 @@
+/* Styl ogólny */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Canvas */
+#gameCanvas {
+  display: block;
+  margin: 32px auto 0 auto;
+  border: 4px solid #e00;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #111 80%, #2a002a 100%);
+  box-shadow: 0 0 32px #e004, 0 0 12px #000a, 0 8px 32px #000b;
+  transition: box-shadow 0.2s;
+}
+
+/* Menu */
+#menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(10,10,20,0.97);
+  border: 2.5px solid #e00;
+  border-radius: 22px;
+  padding: 44px 36px 44px 36px;
+  box-shadow: 0 8px 32px #000b;
+  min-width: 430px; /* poszerzone menu */
+  min-height: 520px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 38px;
+}
+
+/* Tytuł */
+#gameTitle {
+  font-family: 'Creepster', 'Nosifer', 'Orbitron', Arial, sans-serif;
+  font-size: 3.2rem;
+  color: #e00;
+  letter-spacing: 2px;
+  text-shadow: 0 0 16px #000, 0 0 8px #e00, 2px 2px 0 #111;
+  margin-bottom: 0;
+  margin-top: 0;
+  filter: drop-shadow(0 0 12px #900);
+}
+
+/* Start Game + Second Life */
+#mainMenuBtns {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 0;
+}
+
+#startBtn.main-btn {
+  font-size: 1.7rem;
+  padding: 22px 64px;
+  background: linear-gradient(90deg, #222 60%, #333 100%);
+  color: #fff;
+  border: 2.5px solid #e00;
+  border-radius: 12px;
+  box-shadow: 0 2px 18px #0008;
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+#startBtn.main-btn:hover {
+  background: linear-gradient(90deg, #e00 0%, #222 100%);
+  color: #fff;
+  transform: scale(1.06);
+  box-shadow: 0 4px 24px #e004;
+}
+
+/* Second Life - tylko ikonka */
+.secondlife-chk {
+  width: 32px;
+  height: 32px;
+  accent-color: #0f0;
+  margin-left: 0;
+  margin-right: 0;
+  cursor: pointer;
+  appearance: none;
+  border: 2px solid #0f0;
+  border-radius: 50%;
+  background: #181;
+  position: relative;
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+  outline: none;
+}
+.secondlife-chk:checked {
+  box-shadow: 0 0 10px 2px #0f0a;
+  border-color: #fff;
+  background: #0f0;
+}
+.secondlife-chk:focus {
+  outline: 2px solid #fff;
+}
+
+/* Show Soul Core */
+#showSoulCoreRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0 0;
+}
+.soulcore-chk {
+  width: 22px;
+  height: 22px;
+  accent-color: #e00;
+  margin-right: 0;
+  cursor: pointer;
+}
+.soulcore-label {
+  font-family: 'Orbitron', 'Arial', sans-serif;
+  font-size: 1.08rem;
+  color: #e00;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 0 0 4px #e00, 0 0 2px #fff;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hell Mode - wielki przycisk */
+.hell-btn-checkbox {
+  display: none;
+}
+.hell-btn-label {
+  display: block;
+  width: 100%;
+  font-size: 2.1rem;
+  padding: 28px 0;
+  margin: 36px 0 0 0;
+  background: linear-gradient(90deg, #900 0%, #e00 100%);
+  color: #fff;
+  border: 3px solid #e00;
+  border-radius: 14px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  box-shadow: 0 2px 28px #e004, 0 0 12px #e00 inset;
+  text-shadow: 0 0 12px #000, 0 0 2px #fff;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  animation: hellPulse 1.2s infinite alternate;
+  cursor: pointer;
+  text-align: center;
+}
+.hell-btn-checkbox:checked + .hell-btn-label {
+  background: linear-gradient(90deg, #e00 0%, #900 100%);
+  color: #fff;
+  border-color: #fff;
+  box-shadow: 0 0 32px #e00, 0 0 12px #fff inset;
+  transform: scale(1.04) rotate(-2deg);
+}
+.hell-btn-label:hover {
+  background: linear-gradient(90deg, #e00 0%, #900 100%);
+  color: #fff;
+  transform: scale(1.06) rotate(-2deg);
+  box-shadow: 0 8px 40px #e008, 0 0 20px #e00 inset;
+  border-color: #fff;
+}
+@keyframes hellPulse {
+  0% { filter: brightness(1) drop-shadow(0 0 0 #e00); }
+  100% { filter: brightness(1.2) drop-shadow(0 0 16px #e00); }
+}
+
+/* Sidebar z wynikiem */
+#sidebarScore {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 270px;
+  background: linear-gradient(135deg, #1a001a 60%, #2a002a 100%);
+  border: 2.5px solid #e00;
+  box-shadow: 0 0 32px #e004, 0 0 12px #000a;
+  color: #fff;
+  border-radius: 12px;
+  padding: 18px 18px 12px 18px;
+  box-shadow: 0 4px 16px #0008;
+  font-family: Arial, sans-serif;
+  z-index: 10;
+}
+#sidebarScore h3 {
+  margin: 12px 0 8px 0;
+  font-size: 18px;
+  text-align: left;
+  color: #e00;
+  font-family: 'Creepster', 'Nosifer', 'Orbitron', Arial, sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #e00, 0 0 2px #fff;
+  margin-bottom: 10px;
+}
+#sidebarScore ol {
+  padding-left: 10px;
+  margin-right: 0;
+}
+#sidebarScore li {
+  display: flex;
+  align-items: center;
+  font-size: 1.08em;
+  padding-left: 2px;
+  padding-right: 8px;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+  color: #fff;
+  font-family: 'Share Tech Mono', 'Fira Mono', 'Consolas', 'Orbitron', Arial, sans-serif;
+  border-left: 4px solid #fff;
+  position: relative;
+}
+#sidebarScore li.secondlife {
+  border-left: 4px solid #0f0;
+}
+#sidebarScore li.hellscore {
+  background: linear-gradient(90deg, #2a002a 60%, #e00 100%);
+  color: #fff;
+  font-weight: bold;
+  border-left: 4px solid #e00;
+  text-shadow: 0 0 8px #e00, 0 0 2px #fff;
+  position: relative;
+}
+#sidebarScore li.hellscore.secondlife {
+  border-left: 4px solid #0f0;
+}
+#sidebarScore li .score-pos {
+  min-width: 22px;
+  text-align: right;
+  margin-right: 8px;
+  color: #e00;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: 1.08em;
+  letter-spacing: 1px;
+  order: -2;
+}
+#sidebarScore li .score-dodged {
+  color: #fff;
+  font-size: 0.98em;
+  opacity: 0.8;
+  margin-left: 8px;
+  margin-right: 12px;
+  min-width: 85px;
+  text-align: left;
+  order: -2;
+}
+#sidebarScore li .score-time {
+  min-width: 54px;
+  text-align: left;
+  margin-right: 10px;
+  color: #e00;
+  font-weight: bold;
+  font-family: 'Creepster', 'Nosifer', 'Orbitron', Arial, sans-serif;
+  font-size: 1.1em;
+  letter-spacing: 1px;
+  order: -1;
+}
+#sidebarScore li .score-empty {
+  color: #444;
+  font-style: italic;
+  letter-spacing: 2px;
+}
+
+/* Licznik nad tabelą */
+#currentScoreBox {
+  margin-bottom: 18px;
+  padding: 10px 0 0 0;
+  border-bottom: 1px solid #e00;
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-size: 1.15em;
+  color: #fff;
+  text-align: left;
+  letter-spacing: 1px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+#currentScoreLabel {
+  color: #e00;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#currentScoreValue {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* Ukryj sidebarScore tylko w grze */
+body:not(.show-scores) #sidebarScore {
+  display: none;
+}
+
+#optionsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+#secondLifeOption,
+#showSoulCoreRow {
+  display: flex;
+  align-items: center;
+  background: rgba(40,40,60,0.7);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1.1rem;
+  color: #fff;
+  border: 1.5px solid #444;
+  box-shadow: 0 1px 6px #0005;
+  gap: 10px;
+  transition: filter 0.3s, background 0.3s;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#secondLifeOption label,
+#showSoulCoreRow label {
+  font-family: 'Orbitron', Arial, sans-serif;
+  font-size: 1.08rem;
+  color: #e00;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 0 0 4px #e00, 0 0 2px #fff;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 6px;
+}
+
+#secondLifeCheckbox,
+#showHitboxCheckbox {
+  width: 22px;
+  height: 22px;
+  accent-color: #e00;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+/* Efekt "krwi" dla Second Life */
+#secondLifeOption.hell-blood {
+  pointer-events: none;
+  opacity: 0.7;
+  filter: blur(1px) brightness(0.7);
+  background: linear-gradient(120deg, #400 60%, #e00 100%);
+  border: 2px solid #e00;
+  box-shadow: 0 0 18px 6px #e004, 0 0 8px #e00 inset;
+}
+#secondLifeOption.hell-blood label,
+#secondLifeOption.hell-blood input {
+  color: #fff;
+  text-shadow: 0 0 6px #e00, 0 0 2px #fff;
+}
+
