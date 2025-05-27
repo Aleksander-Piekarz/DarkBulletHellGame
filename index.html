@@ -28,6 +28,14 @@
       <label for="hellModeCheckbox" class="hell-btn-label">HELL MODE</label>
     </div>
   </div>
+   <div id="nameInputBox">
+    <label for="playerName" style="font-family:'Nosifer','Creepster','Orbitron',Arial,sans-serif; color:#e00; font-size:1.3em;">
+      ZOSTAW COŚ PO SOBIE:
+    </label>
+    <br>
+    <input type="text" id="playerName" maxlength="12" style="margin-top:12px; font-size:1.2em; border-radius:8px; border:1.5px solid #e00; padding:6px 12px; background:#222; color:#fff; outline:none;">
+    <button id="saveNameBtn" style="margin-left:12px; font-size:1.1em; border-radius:8px; border:1.5px solid #e00; background:#e00; color:#fff; padding:6px 18px; font-family:'Orbitron',Arial,sans-serif; font-weight:bold; cursor:pointer;">Zapisz</button>
+  </div>
   <canvas id="gameCanvas" width="800" height="600"></canvas>
   <div id="sidebarScore">
     <div id="currentScoreBox">
@@ -37,6 +45,7 @@
     <h3>Najlepsze wyniki</h3>
     <ol id="highscores"></ol>
   </div>
+ 
 
   <script src="player.js"></script>
   <script src="bullet.js"></script>

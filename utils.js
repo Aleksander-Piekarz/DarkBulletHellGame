@@ -1,5 +1,4 @@
 function detectCollisions() {
-  // Gracz nietykalny przez określony czas po drugim życiu
   if (frame < player.invincibleUntil) return;
 
   for (let bullet of bullets) {
@@ -10,11 +9,11 @@ function detectCollisions() {
       if (secondLifeEnabled && !secondLifeUsed) {
         secondLifeUsed = true;
         player.hp = 50;
-        player.invincibleUntil = frame + 120; // 2 sekundy nietykalności (przy 60 FPS)
+        player.invincibleUntil = frame + 120;
         return;
       } else {
-        saveHighscore(); // <--- DODAJ TO TUTAJ!
-        gameState = "gameover";
+        // NIE ustawiaj gameState tutaj!
+        player.hp = 0; // wymuś śmierć, obsłuży to gameLoop
         return;
       }
     }
@@ -30,46 +29,57 @@ function drawGameOver() {
   ctx.font = "40px Arial";
   ctx.fillText("GAME OVER", canvas.width / 2 - 120, canvas.height / 2);
   ctx.font = "20px Arial";
-  ctx.fillText(`Przetrwałeś: ${Math.floor(score / 60)} sekund`, canvas.width / 2 - 100, canvas.height / 2 + 40);
+  // Poprawka: użyj endTime i startTime
+  let czas = (typeof endTime !== "undefined" && endTime > 0)
+    ? Math.floor((endTime - startTime) / 1000)
+    : Math.floor((performance.now() - startTime) / 1000);
+  ctx.fillText(`Przetrwałeś: ${czas} sekund`, canvas.width / 2 - 100, canvas.height / 2 + 40);
   ctx.fillText(`Naciśnij ENTER, aby zagrać ponownie`, canvas.width / 2 - 150, canvas.height / 2 + 80);
 }
 
 
 
-function saveHighscore() {
+function saveHighscore(playerName = "") {
   let highscores = JSON.parse(localStorage.getItem("highscores") || "[]");
+  let czas = (typeof endTime !== "undefined" && endTime > 0)
+    ? Math.floor((endTime - startTime) / 1000)
+    : Math.floor((performance.now() - startTime) / 1000);
   highscores.push({
-    time: Math.floor(score / 60),
+    name: playerName || "Anonim",
+    time: czas,
     dodged: dodgedBullets,
     hell: hellMode ? true : false,
-    secondlife: secondLifeUsed ? true : false // zapisz info o użyciu second life
+    secondlife: secondLifeUsed ? true : false
   });
-  // Sortuj po ilości pocisków (malejąco), potem po czasie (malejąco)
   highscores.sort((a, b) => b.dodged - a.dodged || b.time - a.time);
-  highscores = highscores.slice(0, 10);
+  highscores = highscores.slice(0, 5); // tylko top 5
   localStorage.setItem("highscores", JSON.stringify(highscores));
   renderHighscores();
 }
 
 function renderHighscores() {
   let highscores = JSON.parse(localStorage.getItem("highscores") || "[]");
-  // Sortuj po ilości pocisków (malejąco), potem po czasie (malejąco)
   highscores.sort((a, b) => b.dodged - a.dodged || b.time - a.time);
 
   const ol = document.getElementById("highscores");
   ol.innerHTML = "";
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) { // tylko top 5
     const li = document.createElement("li");
     if (highscores[i]) {
       li.innerHTML =
-        `<span class="score-pos">${i + 1}.</span>` +
-        `<span class="score-dodged">pociski: ${highscores[i].dodged}</span>` +
-        `<span class="score-time">${highscores[i].time}s</span>` +
-        (highscores[i].secondlife ? `<span class="score-secondlife" title="Użyto drugiego życia">*</span>` : "");
+        `<div class="score-row1">
+           <span class="score-pos">${i + 1}.</span>
+           <span class="score-name">${highscores[i].name || "Anonim"}</span>
+         </div>
+         <div class="score-row2">
+           <span class="score-dodged">pociski: ${highscores[i].dodged}</span>
+           <span class="score-time">czas: ${highscores[i].time}s</span>
+           ${highscores[i].secondlife ? `<span class="score-secondlife" title="Użyto drugiego życia">*</span>` : ""}
+         </div>`;
       if (highscores[i].hell) li.classList.add("hellscore");
       if (highscores[i].secondlife) li.classList.add("secondlife");
     } else {
-      li.innerHTML = `<span class="score-pos">${i + 1}.</span><span class="score-empty">---</span>`;
+      li.innerHTML = `<div class="score-row1"><span class="score-pos">${i + 1}.</span><span class="score-empty">---</span></div>`;
     }
     ol.appendChild(li);
   }
