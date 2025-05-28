@@ -12,7 +12,7 @@ class Player {
     this.vx = 0;
     this.vy = 0;
     this.speed = 0.8;     
-    this.friction = 0.80;   
+    this.friction = 0.8;   
     this.hitbox = 8;
     this.invincibleUntil = 0;
     this.hp = 100;
