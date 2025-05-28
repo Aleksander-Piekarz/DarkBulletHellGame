@@ -133,12 +133,17 @@ let enemy = new Enemy();
 let patternCooldown = 0;
 let lastPickupSpawn = 0;
 const PICKUP_SPAWN_INTERVAL_MS = hellMode ? 20000 : 10000; 
+let lastFrameTime = performance.now();
+
 function gameLoop(timestamp) {
+  const deltaTime = (timestamp - lastFrameTime) / 1000; // w sekundach
+  lastFrameTime = timestamp;
+
   if (gameState === "menu") return;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  player.update();
+  player.update(deltaTime);
   player.draw();
 
   for (let i = bullets.length - 1; i >= 0; i--) {

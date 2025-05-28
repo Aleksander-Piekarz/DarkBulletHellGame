@@ -70,19 +70,18 @@ class Player {
     }
   }
 
-  update() {
+  update(deltaTime = 1/60) {
     let ax = 0, ay = 0;
-    if (keys["ArrowLeft"] || keys["a"]) this.vx -= this.speed;
-    if (keys["ArrowRight"] || keys["d"]) this.vx += this.speed;
-    if (keys["ArrowUp"] || keys["w"]) this.vy -= this.speed;
-    if (keys["ArrowDown"] || keys["s"]) this.vy += this.speed;
+    if (keys["ArrowLeft"] || keys["a"]) this.vx -= this.speed * deltaTime * 60;
+    if (keys["ArrowRight"] || keys["d"]) this.vx += this.speed * deltaTime * 60;
+    if (keys["ArrowUp"] || keys["w"]) this.vy -= this.speed * deltaTime * 60;
+    if (keys["ArrowDown"] || keys["s"]) this.vy += this.speed * deltaTime * 60;
 
-    // Zastosuj opór
-    this.vx *= this.friction;
-    this.vy *= this.friction;
+    this.vx *= Math.pow(this.friction, deltaTime * 60);
+    this.vy *= Math.pow(this.friction, deltaTime * 60);
 
-    this.x += this.vx;
-    this.y += this.vy;
+    this.x += this.vx * deltaTime * 60;
+    this.y += this.vy * deltaTime * 60;
 
     this.x = Math.max(this.hitbox, Math.min(canvas.width - this.hitbox, this.x));
     this.y = Math.max(this.hitbox, Math.min(canvas.height - this.hitbox, this.y));
