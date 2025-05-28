@@ -11,7 +11,7 @@ class Player {
     this.y = canvas.height - 80;
     this.vx = 0;
     this.vy = 0;
-    this.speed = 0.42;      // było np. 0.3, teraz wolniej
+    this.speed = 0.82;      // było np. 0.3, teraz wolniej
     this.friction = 0.80;   // było np. 0.88, teraz szybciej wyhamowuje
     this.hitbox = 8;
     this.invincibleUntil = 0;
