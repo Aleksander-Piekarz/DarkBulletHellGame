@@ -19,8 +19,18 @@ class Player {
   }
 
   draw() {
-    const isInvincible = frame < this.invincibleUntil;
-    if (isInvincible && frame % 10 < 5) return; // miganie
+    const now = performance.now();
+    const msLeft = invincibleUntilMs - now;
+    const isInvincible = msLeft > 0 || frame < this.invincibleUntil;
+
+    // Miganie w ostatnich 0.5 sekundy
+    let shouldDrawAura = true;
+    if (msLeft > 0 && msLeft < 500) {
+      // Miga bardzo szybko (10 razy na sekundę)
+      shouldDrawAura = Math.floor(now / 50) % 2 === 0;
+    }
+
+    if (isInvincible && frame % 10 < 5) return; // miganie całej postaci
 
     if (this.image.complete && this.image.naturalWidth > 0) {
       const size = canvas.width * 0.06;
@@ -45,6 +55,19 @@ class Player {
       ctx.stroke();
       ctx.restore();
     }
+
+    if (isInvincible && shouldDrawAura) {
+      ctx.save();
+      ctx.globalAlpha = msLeft > 0 && msLeft < 500 ? 0.9 : 0.6;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.hitbox + 18, 0, 2 * Math.PI);
+      ctx.strokeStyle = msLeft > 0 && msLeft < 500 ? "#ff0" : "#0ff";
+      ctx.lineWidth = 4;
+      ctx.shadowColor = msLeft > 0 && msLeft < 500 ? "#ff0" : "#0ff";
+      ctx.shadowBlur = 18;
+      ctx.stroke();
+      ctx.restore();
+    }
   }
 
   update() {
@@ -65,3 +88,5 @@ class Player {
     this.y = Math.max(this.hitbox, Math.min(canvas.height - this.hitbox, this.y));
   }
 }
+
+

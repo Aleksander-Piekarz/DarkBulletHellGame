@@ -1,5 +1,5 @@
 function detectCollisions() {
-  if (frame < player.invincibleUntil) return;
+  if (performance.now() < invincibleUntilMs) return;
 
   for (let bullet of bullets) {
     const dx = bullet.x - player.x;

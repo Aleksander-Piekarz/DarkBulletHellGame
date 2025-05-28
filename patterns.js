@@ -6,22 +6,10 @@ for (let i = 1; i <= 10; i++) {
   bulletImgs.push(img);
 }
 
-
-//SHIELD
-/*
-const shield = new Image();
-shield.src= 'img/shield';
-
-*/
 // Helper: returns a random float in [a, b]
 function rand(a, b) {
   return a + Math.random() * (b - a);
 }
-
-
-
-
-
 
 // --- ŚCIANA Z LUKĄ --- (wygląd: projectile2.png, hitbox: 7)
 function spawnWallWithGapPattern() {
