@@ -86,7 +86,7 @@ function spawnWavePattern() {
 
 
 function spawnFanPattern() {
-  const numBullets = hellMode ? 28 : 12;
+  const numBullets = hellMode ? 16 : 12;
   const speed = hellMode ? 0.40 : 0.45;
   const spread = Math.PI / 2;
   const startAngle = Math.PI / 2 - spread / 2;
