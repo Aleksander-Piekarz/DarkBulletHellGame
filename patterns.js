@@ -1,4 +1,4 @@
-// --- Pociski: różne grafiki ---
+
 const bulletImgs = [];
 for (let i = 1; i <= 10; i++) {
   const img = new Image();
@@ -6,12 +6,12 @@ for (let i = 1; i <= 10; i++) {
   bulletImgs.push(img);
 }
 
-// Helper: returns a random float in [a, b]
+
 function rand(a, b) {
   return a + Math.random() * (b - a);
 }
 
-// --- ŚCIANA Z LUKĄ --- (wygląd: projectile2.png, hitbox: 7)
+
 function spawnWallWithGapPattern() {
   const numBullets = 40;
   const wallWidth = canvas.width * 1;
@@ -27,9 +27,9 @@ function spawnWallWithGapPattern() {
   }
 }
 
-// --- DESZCZ (RAIN) --- (wygląd: projectile2.png, hitbox: 7)
+
 function spawnRainPattern() {
-  const numBullets = hellMode ? 90 : 60;
+  const numBullets = hellMode ? 75 : 60;
   const speed = 0.45;
   const gapIndex = Math.floor(Math.random() * (numBullets - 10)) + 5;
   for (let i = 0; i < numBullets; i++) {
@@ -41,9 +41,9 @@ function spawnRainPattern() {
   }
 }
 
-// --- GĘSTY ŚRODEK (CENTER RAIN) --- (wygląd: projectile3.png, hitbox: 7)
+
 function spawnCenterRainPattern() {
-  const numBullets = hellMode ? 32 : 16;
+  const numBullets = hellMode ? 24 : 16;
   const spread = 320;
   const speed = 0.45;
   const center = rand(canvas.width * 0.25, canvas.width * 0.75);
@@ -57,9 +57,9 @@ function spawnCenterRainPattern() {
   }
 }
 
-// --- FALA (WAVE) --- (wygląd: projectile3.png, hitbox: 10)
+
 function spawnWavePattern() {
-  const numBullets = hellMode ? 28 : 18;
+  const numBullets = hellMode ? 24 : 18;
   const speed = 0.45;
   const waveWidth = canvas.width * 0.5;
   const waveStart = (canvas.width - waveWidth) / 2;
@@ -69,14 +69,14 @@ function spawnWavePattern() {
   for (let i = 0; i < numBullets; i++) {
     if (i >= gapIndex - 1 && i <= gapIndex + 1) continue;
     const x = waveStart + (waveWidth / (numBullets - 1)) * i;
-    // WaveBullet: przesuwa się sinusoidalnie podczas lotu
+   
     let b = new WaveBullet(
       x,
       0,
       Math.PI / 2,
       speed,
       bulletImgs[4],
-      0.015, // częstotliwość fali
+      0.015, 
       amplitude
     );
     b.hitbox = 5;
@@ -84,10 +84,10 @@ function spawnWavePattern() {
   }
 }
 
-// --- WACHLARZ (FAN) --- (wygląd: BigProjectile.png, hitbox: 14)
+
 function spawnFanPattern() {
-  const numBullets = hellMode ? 20 : 12;
-  const speed = hellMode ? 0.38 : 0.45;
+  const numBullets = hellMode ? 28 : 12;
+  const speed = hellMode ? 0.40 : 0.45;
   const spread = Math.PI / 2;
   const startAngle = Math.PI / 2 - spread / 2;
   for (let i = 0; i < numBullets; i++) {
@@ -98,14 +98,14 @@ function spawnFanPattern() {
   }
 }
 
-// --- V-SHAPE --- (wygląd: projectile2.png, hitbox: 7)
+
 function spawnVPattern() {
-  const numBullets = hellMode ? 27 : 17;
-  const speed = hellMode ? 0.38 : 0.45;
+  const numBullets = hellMode ? 22 : 17;
+  const speed = hellMode ? 0.40 : 0.45;
   const centerX = canvas.width / 2;
   const startY = 0;
-  const armLength = 220; // długość ramion V
-  const angleSpread = Math.PI / 1; // szerokość V
+  const armLength = 220;
+  const angleSpread = Math.PI / 1; 
 
   for (let i = 0; i < numBullets; i++) {
     
@@ -118,10 +118,10 @@ function spawnVPattern() {
   }
 }
 
-// --- U-SHAPE --- (wygląd: projectile3.png, hitbox: 7)
+
 function spawnUPattern() {
-  const numBullets = hellMode ? 44 : 28;
-  const speed = hellMode ? 0.38 : 0.45;
+  const numBullets = hellMode ? 34 : 28;
+  const speed = hellMode ? 0.40 : 0.45;
   const leftX = canvas.width / 6;
   const rightX = (canvas.width * 5) / 6;
   const bottomY = 0;
@@ -148,7 +148,6 @@ function spawnUPattern() {
   }
 }
 
-// Circle burst (classic bullet hell) (wygląd: projectile2.png, hitbox: 7)
 function spawnCircleBurstPattern(centerX = canvas.width / 2, centerY = 0) {
   const numBullets = 32;
   for (let i = 0; i < numBullets; i++) {
@@ -159,12 +158,12 @@ function spawnCircleBurstPattern(centerX = canvas.width / 2, centerY = 0) {
   }
 }
 
-// Double wall with two gaps (wygląd: projectile3.png, hitbox: 7)
+
 function spawnDoubleWallWithGapsPattern() {
   const numBullets = 28;
   const wallWidth = canvas.width * 0.8;
   const wallStart = (canvas.width - wallWidth) / 2;
-  const speed = hellMode ? 0.38 : 0.45; // szybciej w Hell Mode
+  const speed = hellMode ? 0.40 : 0.45;
   const gap1 = Math.floor(Math.random() * (numBullets / 2 - 6)) + 3;
   const gap2 = Math.floor(Math.random() * (numBullets / 2 - 6)) + numBullets / 2 + 3;
   for (let i = 0; i < numBullets; i++) {
@@ -176,9 +175,9 @@ function spawnDoubleWallWithGapsPattern() {
   }
 }
 
-// Zigzag pattern (wygląd: projectile3.png, hitbox: 10)
+
 function spawnZigzagPattern() {
-  const numBullets = hellMode ? 28 : 18;
+  const numBullets = hellMode ? 22 : 18;
   const speed = hellMode ? 0.45 : 0.45;
   for (let i = 0; i < numBullets; i++) {
     const x = (canvas.width / numBullets) * (i + 0.5);
@@ -189,9 +188,9 @@ function spawnZigzagPattern() {
   }
 }
 
-// Dense random rain (wygląd: projectile3.png, hitbox: 7)
+
 function spawnDenseRandomPattern() {
-  const numBullets = hellMode ? 60 : 40;
+  const numBullets = hellMode ? 50 : 40;
   const speed = hellMode ? 0.45 : 0.45;
   for (let i = 0; i < numBullets; i++) {
     const x = rand(30, canvas.width - 30);
@@ -201,7 +200,7 @@ function spawnDenseRandomPattern() {
   }
 }
 
-// Aimed pattern (player-focused, can move faster) (wygląd: projectile2.png, hitbox: 7)
+
 function spawnAimedPattern() {
   const numBullets = 10;
   for (let i = 0; i < numBullets; i++) {
@@ -224,7 +223,7 @@ function spawnAimedPattern() {
   }
 }
 
-// Enemy gap circle pattern
+
 function spawnEnemyGapCirclePattern(centerX, centerY) {
   const numBullets = 32;
   const gapStart = Math.random() * (Math.PI * 2);
@@ -236,7 +235,7 @@ function spawnEnemyGapCirclePattern(centerX, centerY) {
   }
 }
 
-// Patterns array
+// Patterns
 const patterns = [
   spawnRainPattern,
   spawnCenterRainPattern,
@@ -250,7 +249,7 @@ const patterns = [
    spawnDenseRandomPattern,
 ];
 
-// Only one non-aimed pattern at a time, but can always add aimed pattern
+
 function spawnPattern() {
   if (patterns.length === 0) return;
   const pattern = patterns[Math.floor(Math.random() * patterns.length)];
