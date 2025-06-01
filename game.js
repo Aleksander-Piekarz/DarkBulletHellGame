@@ -136,7 +136,7 @@ const PICKUP_SPAWN_INTERVAL_MS = hellMode ? 20000 : 10000;
 let lastFrameTime = performance.now();
 
 function gameLoop(timestamp) {
-  const deltaTime = (timestamp - lastFrameTime) / 1000; // w sekundach
+  const deltaTime = (timestamp - lastFrameTime) / 1000; 
   lastFrameTime = timestamp;
 
   if (gameState === "menu") return;
@@ -172,7 +172,7 @@ function gameLoop(timestamp) {
     }
   }
 
-  let spawnInterval = hellMode ? 1000 : 1500;
+  let spawnInterval = hellMode ? 1250 : 1500;
   if (!lastSpawn) lastSpawn = timestamp;
   if (timestamp - lastSpawn > spawnInterval) {
     spawnPattern();
