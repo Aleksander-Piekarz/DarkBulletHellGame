@@ -52,7 +52,7 @@ function saveHighscore(playerName = "") {
     secondlife: secondLifeUsed ? true : false
   });
   highscores.sort((a, b) => b.dodged - a.dodged || b.time - a.time);
-  highscores = highscores.slice(0, 5); // tylko top 5
+  highscores = highscores.slice(0, 5);
   localStorage.setItem("highscores", JSON.stringify(highscores));
   renderHighscores();
 }
